@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %} 
+<div class="homecontent">
+    <div id="slider">
+      <!--<a href="#" class="control_next">></a>
+      <a href="#" class="control_prev"><</a>!-->
+        <ul>
+          <li><img class="sliderimg" src="{% static "images/slider1.jpg" %}"></li>
+          <li><img class="sliderimg" src="{% static "images/slider2.jpg" %}"></li>
+          <li><img class="sliderimg" src="{% static "images/slider3.jpg" %}"></li>
+        </ul>  
+    </div>
+   	<div class="welcome" style="width:100%">
+   	    <div class="para1 paracolor" style="float:left;">
+   	        <h2 class="header">We Are....</h2><hr>
+    		    <p style="margin-left:30px;">We are pleased to introduce ourselves as one of established Trading & Contracting Companies In the state of Kuwait since 2002, with the primary objective of providing Diversified Multidimensional Business client requirements including Civil Contracts, Electrical & Mechanical Works, Manpower, Interior designing etc.., thus providing a unique basis of continual Innovation focused on the needs.... <a href="{% url 'weare' %}">Read More</a>  </p>
+        </div>
+        <div class="logo">
+    	    <img src="{%static "images/logo.png"%}" id="logoimg">
+        </div>
+        
+    </div>
+    <div class="para2 paracolor">
+       	<h2 class="header">Our Team</h2><hr>
+         	<p style="margin-left:30px;">
+        		At <b>Sedarat Al-Barakh,</b> we have a team of skilled professionals and  support team who are the Source of inspiration, able to  work through with result oriented targets.Our Motto is to Support every  requirement of our highly valued and respectable clientele & their  missions...
+        	    <a href="{% url 'ourteam' %}">Read More</a> 
+        	</p><hr>
+    </div>
+    
+</div>
+
+
+
+<script src="{% static "js/jquery.min.js" %}"></script>
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+
+  $(document).ready(function(){
+    setInterval(function () {
+        moveLeft();
+    }, 3000);
+  });
+  
+	var slideCount = $('#slider ul li').length;
+	var slideWidth = $('#slider ul li').width();
+	var slideHeight = $('#slider ul li').height();
+	var sliderUlWidth = slideCount * slideWidth;
+	
+	$('#slider').css({ width: slideWidth, height: slideHeight });
+	
+	$('#slider ul').css({ width: sliderUlWidth, marginLeft: - slideWidth });
+	
+    $('#slider ul li:last-child').prependTo('#slider ul');
+
+    function moveLeft() {
+        $('#slider ul').animate({
+            left: + slideWidth
+        }, 200, function () {
+            $('#slider ul li:last-child').prependTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    function moveRight() {
+        $('#slider ul').animate({
+            left: - slideWidth
+        }, 200, function () {
+            $('#slider ul li:first-child').appendTo('#slider ul');
+            $('#slider ul').css('left', '');
+        });
+    };
+
+    $('a.control_prev').click(function () {
+        moveLeft();
+    });
+
+    $('a.control_next').click(function () {
+        moveRight();
+    });
+
+}); 
+</script>
+{% endblock %}
+  
+
+ 
+
